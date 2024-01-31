@@ -11,7 +11,7 @@
 
 #
 
-# 1. 내가 작성한 코드
+# 2. 최적 코드
 n = 2
 m = 5
 
@@ -28,6 +28,6 @@ def solution(n, m):
     return [gcd, lcm]
 
 print(solution(n,m))
-# 2. 최적 코드
+
 
 
