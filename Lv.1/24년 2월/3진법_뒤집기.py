@@ -1,24 +1,21 @@
 # 1. 내가 작성한 코드
 # (내일 divmod 밖에 방법 없는지 보기)
-n = 45
+n = 125
 
 def solution(n):
-    answer = ''
+    answer = ""
     result = 0
 
-    mok = n
-    while mok > 0:
-        answer += str(mok % 3)
-        mok //= 3
-
-    print(answer)
+    while n > 0:
+        m = n % 3
+        n = n // 3
+        answer += str(m)
 
     answer = answer[::-1]
 
     cnt = 1
-
-    for i in range(len(answer)):
-        print(int(answer[i]) * i * cnt)
+    for i in answer:
+        result += int(i) * cnt
         cnt *= 3
 
     return result
@@ -37,10 +34,12 @@ def good_solution(n):
     arr = arr[::-1] # 문자열을 반대로 정렬
     cnt = 1
 
-    for i in arr: # 다시 삼진법으로 계산
+    for i in arr: # 다시 십진법으로 계산
         answer += int(i) * cnt
         cnt *= 3
+        # print("i:",i)
+        # print("cnt:", cnt)
 
     return answer
 
-print(good_solution(125))
+print(good_solution(n))
