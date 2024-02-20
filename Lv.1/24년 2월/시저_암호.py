@@ -15,47 +15,37 @@
 # "z"	    1	"a"
 # "a B z"	4	"e F d"
 
-# 문제 해결 생각
-# 1. 아스키코드로 구함
-# 2. result에 append
-#   2-1 if s[i]가 공백이면 공백을 append
-#   2-2 else s[i]가 알파벳이므로 +1한 값을 append
-# 3. return result
-
 s = "a B z"
 n = 4
 
-def solution(s,n):
-    result = ""
-    # little = []
-    # big = []
-    #
-    # for i in range(65, 91): # 대문자 배열 생성
-    #     little.append(chr(i))
-    # for i in range(97, 123): # 소문자 배열 생성
-    #     big.append(chr(i))
+# 1. 내가 작성한 코드
+def solution(s, n):
+    big = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    little = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
+    result = ""
     for i in s:
         if i == " ": # 공백이면 공백 더해주기
             result += " "
         else:
-            if ord(i) + n <= 65 <= 90:
-                if ord(i) + n > 90:
-                    # print(chr(ord(i) + n - 26))
-                    result += chr(ord(i) + n - 26)
-                else:
-                    # print(chr(ord(i) + n))
-                    result += chr(ord(i) + n)
-            else:
-                if ord(i) + n > 122:
-                    # print(chr(ord(i) + n - 26))
-                    result += chr(ord(i) + n - 26)
-                else:
-                    # print(chr(ord(i) + n))
-                    result += chr(ord(i) + n)
-
+            if ord("A") <= ord(i) <= ord("Z"): # 대문자일때
+                result += big[(ord(i)+n-65) % 26] # i를 아스키로 변환한 값에 n을 더해주고 A 글자만큼 뺀 값에 26을 나눴을 때의 나머지
+            elif ord("a") <= ord(i) <= ord("z"): # 소문자일때
+                result += little[(ord(i)+n-97) % 26] # i를 아스키로 변환한 값에 n을 더해주고 a 글자만큼 뺀 값에 26을 나눴을 때의 나머지
     return result
 
-
-
 print(solution(s,n))
+
+# 2. 최적 코드
+def good_solution(s, n):
+    s = list(s)
+    for i in range(len(s)):
+        if s[i].isupper():
+            s[i]=chr((ord(s[i])-ord('A')+ n)%26+ord('A'))
+        elif s[i].islower():
+            s[i]=chr((ord(s[i])-ord('a')+ n)%26+ord('a'))
+
+    return "".join(s)
+
+print(good_solution(s, n))
+
